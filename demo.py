@@ -3,6 +3,7 @@ import win32api
 import win32con
 import time
 import pygetwindow as gw
+import pyautogui
 
 
 def showAllWindows():
@@ -13,7 +14,7 @@ def showActiveWindow():
     while True:
         window = win32gui.GetForegroundWindow()
         print(window)
-        time.sleep(2)
+        time.sleep(2.5)
 
 def pressNumber0(window):
     win32api.PostMessage(window, win32con.WM_KEYDOWN, win32con.VK_F12, 0)
@@ -31,12 +32,20 @@ def clickWithId(id):
         pressNumber0(id)
         time.sleep(1)
 
+def clickA(inteval):
+    while True:
+        # pyautogui.press("A")
+        pyautogui.hotkey("alt","a")
+        time.sleep(inteval)
+        pyautogui.press("esc")
+        time.sleep(inteval)
+
 def main():
     # showAllWindows()
-    # clickWithTitle("阿里云控制台-日志服务 - Google Chrome")
-    showActiveWindow()
-    clickWithId(198096)
-        
+    # clickWithTitle("阿里云控制台-日志服务 - GAoogle Chrome")AAA
+    # showActiveWindow()
+    # clickWithId(198096)
+    clickA(1)
 
 if __name__ == "__main__":
     main()
