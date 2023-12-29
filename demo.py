@@ -5,7 +5,7 @@ import sys
 
 aKeyInterval = 1.8
 bKeyInterval = 60
-pressCount = 100
+pressCount = 1000
 pressInterval = 0.1
 
 def f1Strategy():
@@ -28,6 +28,25 @@ def f3Strategy():
     threadB.start()
     threadLeft.start()
 
+def f4Strategy():
+    print("F4开始")
+    pauseEvent.set()
+    threadGoWG.start()
+    time.sleep(10)
+    threadA.start()
+
+def goWG():
+    print("F4开始")
+    time.sleep(1)
+    keyboard.press('space')
+    time.sleep(1)
+    keyboard.press('space')
+    time.sleep(1)
+    keyboard.press('right')
+    time.sleep(1)
+    keyboard.press('enter')
+    time.sleep(1220) 
+
 def escStrategy():
     print("暂停")
     pauseEvent.clear()
@@ -43,6 +62,9 @@ def pressListener(event):
 
     if key == 'f3':
         f3Strategy()
+
+    if key == 'f4':
+        f4Strategy()
 
     if key == 'esc':
         escStrategy()
@@ -78,7 +100,8 @@ def pressKey(key,count):
 threadA = threading.Thread(target=pressA) 
 threadB = threading.Thread(target=pressB) 
 threadRight = threading.Thread(target=pressRight) 
-threadLeft = threading.Thread(target=pressLeft) 
+threadLeft = threading.Thread(target=pressLeft)
+threadGoWG = threading.Thread(target=goWG) 
 pauseEvent = threading.Event()
 
 def main():
