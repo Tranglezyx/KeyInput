@@ -34,6 +34,7 @@ def f4Strategy():
     threadGoWG.start()
     time.sleep(6)
     threadA.start()
+    threadB.start()
 
 def goWG():
     print("F4开始")
