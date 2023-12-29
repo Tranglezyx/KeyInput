@@ -13,27 +13,27 @@ def pressListener(event):
     print("按键被按压 :" + key)
     if key == 'f1':
         print("F1开始")
-        pause_event.set()
+        pauseEvent.set()
         threadA.start()
         threadB.start()
 
     if key == 'f2':
         print("F2开始")
-        pause_event.set()
+        pauseEvent.set()
         threadA.start()
         threadB.start()
         threadRight.start()
 
     if key == 'f3':
         print("F3开始")
-        pause_event.set()
+        pauseEvent.set()
         threadA.start()
         threadB.start()
         threadLeft.start()
 
     if key == 'esc':
         print("暂停")
-        pause_event.clear()
+        pauseEvent.clear()
 
     if key == 'f12':
         print("退出程序")
@@ -41,27 +41,27 @@ def pressListener(event):
 
 def pressA():
     while True:
-        pause_event.wait()
+        pauseEvent.wait()
         keyboard.press('a')
         keyboard.release('a')
         time.sleep(aKeyInterval)
 
 def pressB():
     while True:
-        pause_event.wait()
+        pauseEvent.wait()
         keyboard.press('b')
         keyboard.release('b')
         time.sleep(bKeyInterval)
 
 def pressRight():
     while True:
-        pause_event.wait()
+        pauseEvent.wait()
         pressKey('right',pressCount)
         time.sleep(pressInterval)
 
 def pressLeft():
     while True:
-        pause_event.wait()
+        pauseEvent.wait()
         pressKey('left',pressCount)
         time.sleep(pressInterval)
 
@@ -73,7 +73,7 @@ threadA = threading.Thread(target=pressA)
 threadB = threading.Thread(target=pressB) 
 threadRight = threading.Thread(target=pressRight) 
 threadLeft = threading.Thread(target=pressLeft) 
-pause_event = threading.Event()
+pauseEvent = threading.Event()
 
 def main():
     keyboard.on_press(pressListener)
