@@ -5,7 +5,7 @@ import sys
 
 aKeyInterval = 1.8
 bKeyInterval = 600
-pressCount = 10000
+pressCount = 100
 pressInterval = 0.1
 
 def pressListener(event):
@@ -43,14 +43,12 @@ def pressA():
     while True:
         pauseEvent.wait()
         keyboard.press('a')
-        keyboard.release('a')
         time.sleep(aKeyInterval)
 
 def pressB():
     while True:
         pauseEvent.wait()
         keyboard.press('b')
-        keyboard.release('b')
         time.sleep(bKeyInterval)
 
 def pressRight():
