@@ -8,36 +8,44 @@ bKeyInterval = 60
 pressCount = 100
 pressInterval = 0.1
 
+def f1Strategy():
+    print("F1开始")
+    pauseEvent.set()
+    threadA.start()
+    threadB.start()
+
+def f2Strategy():
+    print("F2开始")
+    pauseEvent.set()
+    threadA.start()
+    threadB.start()
+    threadRight.start()
+
+def f3Strategy():
+    print("F3开始")
+    pauseEvent.set()
+    threadA.start()
+    threadB.start()
+    threadLeft.start()
+
+def escStrategy():
+    print("暂停")
+    pauseEvent.clear()
+
 def pressListener(event):
     key = event.name
     print("按键被按压 :" + key)
     if key == 'f1':
-        print("F1开始")
-        pauseEvent.set()
-        threadA.start()
-        threadB.start()
+        f1Strategy()
 
     if key == 'f2':
-        print("F2开始")
-        pauseEvent.set()
-        threadA.start()
-        threadB.start()
-        threadRight.start()
+        f2Strategy()
 
     if key == 'f3':
-        print("F3开始")
-        pauseEvent.set()
-        threadA.start()
-        threadB.start()
-        threadLeft.start()
+        f3Strategy()
 
     if key == 'esc':
-        print("暂停")
-        pauseEvent.clear()
-
-    if key == 'f12':
-        print("退出程序")
-        sys.exit()
+        escStrategy()
 
 def pressA():
     while True:
