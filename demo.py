@@ -4,7 +4,7 @@ import threading
 import sys
 
 aKeyInterval = 1.8
-bKeyInterval = 60
+bKeyInterval = 300
 pressCount = 1000
 pressInterval = 0.1
 
