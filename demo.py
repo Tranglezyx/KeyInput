@@ -32,20 +32,22 @@ def f4Strategy():
     print("F4开始")
     pauseEvent.set()
     threadGoWG.start()
-    time.sleep(10)
+    time.sleep(6)
     threadA.start()
 
 def goWG():
     print("F4开始")
-    time.sleep(1)
-    keyboard.press('space')
-    time.sleep(1)
-    keyboard.press('space')
-    time.sleep(1)
-    keyboard.press('right')
-    time.sleep(1)
-    keyboard.press('enter')
-    time.sleep(1220) 
+    while True:
+        pauseEvent.wait()
+        time.sleep(1)
+        keyboard.press('space')
+        time.sleep(1)
+        keyboard.press('right')
+        time.sleep(0.5)
+        keyboard.release('right')
+        time.sleep(0.5)
+        keyboard.press('space')
+        time.sleep(1220) 
 
 def escStrategy():
     print("暂停")
