@@ -53,6 +53,8 @@ def goWG():
 def escStrategy():
     print("暂停")
     pauseEvent.clear()
+    keyboard.release('right')
+    keyboard.release('left')
 
 def pressListener(event):
     key = event.name
@@ -87,19 +89,15 @@ def pressB():
 def pressRight():
     while True:
         pauseEvent.wait()
-        pressKey('right',pressCount)
+        keyboard.press('right')
         time.sleep(pressInterval)
 
 def pressLeft():
     while True:
         pauseEvent.wait()
-        pressKey('left',pressCount)
+        keyboard.press('left')
         time.sleep(pressInterval)
-
-def pressKey(key,count):
-    for i in range(count):
-        keyboard.press(key)
-
+    
 threadA = threading.Thread(target=pressA) 
 threadB = threading.Thread(target=pressB) 
 threadRight = threading.Thread(target=pressRight) 
