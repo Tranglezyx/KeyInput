@@ -3,10 +3,13 @@ import keyboard
 import threading
 import sys
 
+buffKey = ['2','4']
 aKeyInterval = 1.8
 bKeyInterval = 300
+buffInterval = 250
 pressCount = 1000
 pressInterval = 0.1
+
 
 def f1Strategy():
     print("F1开始")
@@ -86,6 +89,14 @@ def pressB():
         keyboard.press('b')
         time.sleep(bKeyInterval)
 
+def pressBuff():
+    while True:
+        pauseEvent.wait()
+        for key in buffKey:
+            keyboard.press(key)
+            time.sleep(0.5)
+        time.sleep(buffInterval)
+
 def pressRight():
     while True:
         pauseEvent.wait()
@@ -100,6 +111,7 @@ def pressLeft():
     
 threadA = threading.Thread(target=pressA) 
 threadB = threading.Thread(target=pressB) 
+threadBuff = threading.Thread(target=pressBuff)
 threadRight = threading.Thread(target=pressRight) 
 threadLeft = threading.Thread(target=pressLeft)
 threadGoWG = threading.Thread(target=goWG) 
