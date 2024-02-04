@@ -1,27 +1,28 @@
 import time
 import keyboard
-import threading
-import sys
 
-zeroKeyInterval = 0.01
-ctrlKeyInterval = 0.01
+mainKey = 'q'
+mainKeyInterval = 1
+otherInterval = 0.2
+keyList = ['a', 'd', 'v'] 
 
+start = 0
 
 def f1Strategy():
     print("F1开始")
-    pauseEvent.set()
-    threadZero.start()
-
-def f2Strategy():
-    print("F2开始")
-    pauseEvent.set()
-    threadCtrl.start()
+    start = 1
+    while start == 1:
+        nowTime = time.time()
+        while time.time() < nowTime + 10:
+            keyboard.press(mainKey)
+            time.sleep(mainKeyInterval)
+        for index, element in enumerate(keyList):  
+            keyboard.press(element)
+            time.sleep(otherInterval)
 
 def escStrategy():
+    start = 0
     print("暂停")
-    pauseEvent.clear()
-    keyboard.release('right')
-    keyboard.release('left')
 
 def pressListener(event):
     key = event.name
@@ -29,28 +30,8 @@ def pressListener(event):
     if key == 'f1':
         f1Strategy()
 
-    if key == 'f2':
-        f2Strategy()
-
     if key == 'esc':
         escStrategy()
-
-def pressZero():
-    while True:
-        pauseEvent.wait()
-        keyboard.press('0')
-        time.sleep(zeroKeyInterval)
-
-def pressCtrl():
-    while True:
-        pauseEvent.wait()
-        keyboard.press('b')
-        time.sleep(ctrlKeyInterval)
-
-    
-threadZero = threading.Thread(target=pressZero) 
-threadCtrl = threading.Thread(target=pressCtrl) 
-pauseEvent = threading.Event()
 
 def main():
     keyboard.on_press(pressListener)
@@ -58,3 +39,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
