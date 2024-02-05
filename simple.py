@@ -1,24 +1,32 @@
 import time
 import keyboard
 
-mainKey = 'q'
-mainKeyInterval = 1
-otherInterval = 0.2
-keyList = ['a', 'd', 'v'] 
-
-start = 0
+mainKey = 'ctrl'
+mainKeyInterval = 0.01
+otherInterval = 0.5
+keyList = ['a','d','v','b'] 
 
 def f1Strategy():
+    time.sleep(5)
+    pressKey('9')
     print("F1开始")
-    start = 1
-    while start == 1:
+    lastTime =  time.time() + 3600
+    while time.time() < lastTime:
+        time.sleep(2)
         nowTime = time.time()
-        while time.time() < nowTime + 10:
-            keyboard.press(mainKey)
+        endTime = nowTime + 10
+        print("开始,now : {} ,end : {}".format(nowTime,endTime))
+        print("按键被按压 : " + mainKey)
+        keyboard.press(mainKey)
+        while time.time() < endTime:
             time.sleep(mainKeyInterval)
-        for index, element in enumerate(keyList):  
-            keyboard.press(element)
-            time.sleep(otherInterval)
+        keyboard.release(mainKey)
+        time.sleep(0.5)
+        for index, element in enumerate(keyList):
+            print("按键被按压 : " + element)  
+            pressKey(element)
+    time.sleep(5)
+    comback()
 
 def escStrategy():
     start = 0
@@ -29,13 +37,31 @@ def pressListener(event):
     print("按键被按压 :" + key)
     if key == 'f1':
         f1Strategy()
+    if key == 'f2':
+        comback()
 
     if key == 'esc':
         escStrategy()
 
+def comback():
+    pressKey('j')
+    pressKey('down')
+    pressKey('down')
+    pressKey('down')
+    pressKey('enter')
+    pressKey('down')
+    pressKey('enter')
+
 def main():
     keyboard.on_press(pressListener)
     keyboard.wait()
+
+def pressKey(key):
+    keySleep = 0.3
+    keyboard.press(key)
+    time.sleep(keySleep)
+    keyboard.release(key)
+    time.sleep(keySleep)
 
 if __name__ == "__main__":
     main()
