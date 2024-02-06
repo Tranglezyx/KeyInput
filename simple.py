@@ -27,6 +27,10 @@ def f1Strategy():
             pressKey(element)
     time.sleep(5)
     comback()
+    time.sleep(5)
+    comback()
+    time.sleep(5)
+    comback()
 
 def escStrategy():
     start = 0
@@ -44,6 +48,7 @@ def pressListener(event):
         escStrategy()
 
 def comback():
+    pressKey('esc')
     pressKey('j')
     pressKey('down')
     pressKey('down')
