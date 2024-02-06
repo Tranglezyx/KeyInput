@@ -9,6 +9,8 @@ keyList = ['a','d','v','b']
 def f1Strategy():
     time.sleep(5)
     pressKey('9')
+    pressKey('9')
+    pressKey('9')
     print("F1开始")
     lastTime =  time.time() + 3600
     while time.time() < lastTime:
@@ -47,8 +49,19 @@ def pressListener(event):
     if key == 'esc':
         escStrategy()
 
+def leftAndRightWalk():
+    pressKey('left')
+    pressKey('left')
+    pressKey('left')
+    pressKey('left')
+    pressKey('left')
+    pressKey('right')
+    pressKey('right')
+    pressKey('right')
+    pressKey('right')
+    pressKey('right')
+
 def comback():
-    pressKey('esc')
     pressKey('j')
     pressKey('down')
     pressKey('down')
