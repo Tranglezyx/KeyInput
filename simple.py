@@ -4,7 +4,11 @@ import keyboard
 mainKey = 'ctrl'
 mainKeyInterval = 0.01
 otherInterval = 0.5
-keyList = ['a','d','v','b'] 
+keyList = ['a','d','v','b']
+moveFlag = False
+moveInterval = 180
+endDirection = 'left'
+runTime = 7200
 
 def f1Strategy():
     time.sleep(5)
@@ -12,21 +16,25 @@ def f1Strategy():
     pressKey('9')
     pressKey('9')
     print("F1开始")
-    lastTime =  time.time() + 3600
+    lastTime =  time.time() + runTime
+    lastMoveTime = time.time()
     while time.time() < lastTime:
         time.sleep(2)
         nowTime = time.time()
         endTime = nowTime + 10
         print("开始,now : {} ,end : {}".format(nowTime,endTime))
-        print("按键被按压 : " + mainKey)
         keyboard.press(mainKey)
         while time.time() < endTime:
             time.sleep(mainKeyInterval)
         keyboard.release(mainKey)
         time.sleep(0.5)
         for index, element in enumerate(keyList):
-            print("按键被按压 : " + element)  
             pressKey(element)
+        if time.time() > lastMoveTime + moveInterval and moveFlag:
+            print('左右走一次,now:{},lastMoveTime:{}'.format(time.time(),lastMoveTime))
+            leftAndRightMove()
+            fastPressKey(endDirection)
+            lastMoveTime = time.time()
     time.sleep(5)
     comback()
     time.sleep(5)
@@ -49,16 +57,24 @@ def pressListener(event):
     if key == 'esc':
         escStrategy()
 
-def leftAndRightWalk():
+def fastPressKey(key):
+    keySleep = 0.05
+    keyboard.press(key)
+    time.sleep(keySleep)
+    keyboard.release(key)
+    time.sleep(keySleep)
+
+def pressKey(key):
+    print("按键被按压 : " + key)  
+    keySleep = 0.3
+    keyboard.press(key)
+    time.sleep(keySleep)
+    keyboard.release(key)
+    time.sleep(keySleep)
+
+def leftAndRightMove():
     pressKey('left')
-    pressKey('left')
-    pressKey('left')
-    pressKey('left')
-    pressKey('left')
-    pressKey('right')
-    pressKey('right')
-    pressKey('right')
-    pressKey('right')
+    time.sleep(0.5)
     pressKey('right')
 
 def comback():
@@ -73,13 +89,6 @@ def comback():
 def main():
     keyboard.on_press(pressListener)
     keyboard.wait()
-
-def pressKey(key):
-    keySleep = 0.3
-    keyboard.press(key)
-    time.sleep(keySleep)
-    keyboard.release(key)
-    time.sleep(keySleep)
 
 if __name__ == "__main__":
     main()
