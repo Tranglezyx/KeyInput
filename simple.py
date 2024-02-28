@@ -4,11 +4,11 @@ import keyboard
 mainKey = 'ctrl'
 mainKeyInterval = 0.01
 otherInterval = 0.5
-keyList = ['a','d','v','b']
-moveFlag = False
+keyList = ['1','2','4','f']
+moveFlag = True
 moveInterval = 180
 endDirection = 'left'
-runTime = 7200
+runTime = 3600
 
 def f1Strategy():
     time.sleep(5)
@@ -65,8 +65,11 @@ def fastPressKey(key):
     time.sleep(keySleep)
 
 def pressKey(key):
-    print("按键被按压 : " + key)  
     keySleep = 0.3
+    pressKeyWithTime(key,keySleep)
+
+def pressKeyWithTime(key,keySleep):
+    print("按键被按压 : " + key)  
     keyboard.press(key)
     time.sleep(keySleep)
     keyboard.release(key)
@@ -75,7 +78,7 @@ def pressKey(key):
 def leftAndRightMove():
     pressKey('left')
     time.sleep(0.5)
-    pressKey('right')
+    pressKeyWithTime('right',0.25)
 
 def comback():
     pressKey('j')
