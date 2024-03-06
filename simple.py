@@ -9,19 +9,21 @@ moveFlag = True
 moveInterval = 180
 endDirection = 'left'
 runTime = 3600
+# 技能使用间隔时间
+clickTime = 6
 
 def f1Strategy():
     time.sleep(5)
-    pressKey('9')
-    pressKey('9')
-    pressKey('9')
+    pressKey('0')
+    pressKey('0')
+    pressKey('0')
     print("F1开始")
     lastTime =  time.time() + runTime
     lastMoveTime = time.time()
     while time.time() < lastTime:
         time.sleep(2)
         nowTime = time.time()
-        endTime = nowTime + 10
+        endTime = nowTime + clickTime
         print("开始,now : {} ,end : {}".format(nowTime,endTime))
         keyboard.press(mainKey)
         while time.time() < endTime:
