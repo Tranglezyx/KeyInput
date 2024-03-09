@@ -7,7 +7,7 @@ otherInterval = 0.5
 keyList = ['1','2','4','f']
 moveFlag = True
 moveInterval = 180
-endDirection = 'left'
+endDirection = 'right'
 runTime = 3600
 # 技能使用间隔时间
 clickTime = 6
