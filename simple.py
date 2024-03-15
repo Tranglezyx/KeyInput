@@ -50,7 +50,7 @@ def f3Strategy():
     pressKey('0')
     pressKey('0')
     pressKey('0')
-    count = 4
+    count = 5
     lastTime =  time.time() + runTime
     while time.time() < lastTime:
         jumpAndHit('left',count)
@@ -70,7 +70,7 @@ def jumpAndHit(direction,count):
     hitKey = 'a'
     for i in range(count):
         pressKeyWithTime(jumpKey,0.1)
-        pressKeyWithTime(jumpKey,0.08)
+        pressKeyWithTime(jumpKey,0.03)
         pressKeyWithTime(hitKey,0.1)
         time.sleep(0.5)
 
