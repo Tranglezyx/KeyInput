@@ -4,7 +4,7 @@ import keyboard
 mainKey = 'ctrl'
 mainKeyInterval = 0.01
 otherInterval = 0.5
-keyList = ['1','2','4','f']
+keyList = ['1','2','4','3','f']
 moveFlag = True
 moveInterval = 180
 endDirection = 'right'
@@ -44,6 +44,36 @@ def f1Strategy():
     time.sleep(5)
     comback()
 
+def f3Strategy():
+    print("F3开始")
+    time.sleep(3)
+    pressKey('0')
+    pressKey('0')
+    pressKey('0')
+    count = 4
+    lastTime =  time.time() + runTime
+    while time.time() < lastTime:
+        jumpAndHit('left',count)
+        jumpAndHit('right',count)
+
+    time.sleep(5)
+    comback()
+    time.sleep(5)
+    comback()
+    time.sleep(5)
+    comback()
+
+def jumpAndHit(direction,count):
+    time.sleep(0.5)
+    pressKey(direction)
+    jumpKey = 'alt'
+    hitKey = 'a'
+    for i in range(count):
+        pressKeyWithTime(jumpKey,0.1)
+        pressKeyWithTime(jumpKey,0.08)
+        pressKeyWithTime(hitKey,0.1)
+        time.sleep(0.5)
+
 def escStrategy():
     start = 0
     print("暂停")
@@ -55,9 +85,8 @@ def pressListener(event):
         f1Strategy()
     if key == 'f2':
         comback()
-
-    if key == 'esc':
-        escStrategy()
+    if key == 'f3':
+        f3Strategy()
 
 def fastPressKey(key):
     keySleep = 0.05
