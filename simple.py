@@ -50,11 +50,17 @@ def f3Strategy():
     pressKey('0')
     pressKey('0')
     pressKey('0')
-    count = 5
+    count = 4
     lastTime =  time.time() + runTime
+    lastMoveTime = time.time()
     while time.time() < lastTime:
         jumpAndHit('left',count)
         jumpAndHit('right',count)
+        if time.time() > lastMoveTime + 10:
+            lastMoveTime = time.time()
+            for index, element in enumerate(keyList):
+                pressKey(element)
+            
 
     time.sleep(5)
     comback()
