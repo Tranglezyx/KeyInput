@@ -24,18 +24,19 @@ def findLocaltion():
 
     # 设置匹配的阈值（0.8 表示匹配度 80% 以上）
     threshold = 0.8
+
     if max_val >= threshold:
-        print(f"匹配成功！图标坐标: {max_loc}{min_val}")
+        print(f"匹配成功！图标坐标: {max_loc}")
         top_left = max_loc
         icon_w, icon_h = icon_image.shape[1], icon_image.shape[0]
         bottom_right = (top_left[0] + icon_w, top_left[1] + icon_h)
         
         # 在截图上绘制矩形标记图标位置
         cv2.rectangle(desktop_image, top_left, bottom_right, (0, 255, 0), 2)
-        cv2.imwrite('tmp/result.png', desktop_image)
+        # cv2.imwrite('tmp/result.png', desktop_image)
         if max_val >= threshold:
             icon_center = (top_left[0] + icon_w // 2, top_left[1] + icon_h // 2)
-            pyautogui.moveTo(icon_center[0], icon_center[1])
+            # pyautogui.moveTo(icon_center[0], icon_center[1])
             # pyautogui.click()
     else:
         print("未能在桌面上找到匹配的图标。")
